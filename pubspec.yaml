@@ -1,0 +1,11 @@
+name: accept_language_parser
+description: Parse and match HTTP `Accept-Language` header.
+version: 1.0.0
+homepage: https://github.com/mgenware/accept_language_parser
+
+environment:
+  sdk: ">=2.13.0 <3.0.0"
+
+dev_dependencies:
+  mgenware_dart_lints: ^1.0.0
+  test: ^1.16.0
