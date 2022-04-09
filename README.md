@@ -5,18 +5,42 @@ Dart port of [accept-language-parser](https://github.com/opentable/accept-langua
 
 ## Usage
 
-Install and import this package:
-
-```sh
-import 'package:accept_language_parser/accept_language_parser.dart';
-```
-
-Example:
-
 ```dart
 import 'package:accept_language_parser/accept_language_parser.dart';
 
 void main() async {
-  print(parseAcceptLanguage('zh-Hans').toString());
+  var languages = parseAcceptLanguage('en-GB,en;q=0.8,fr-FR');
+  print(languages);
+  /**
+    [
+      {
+          "c":"en",
+          "s":null,
+          "r":"GB",
+          "q":1.0
+      },
+      {
+          "c":"fr",
+          "s":null,
+          "r":"FR",
+          "q":1.0
+      },
+      {
+          "c":"en",
+          "s":null,
+          "r":null,
+          "q":0.8
+      }
+    ]
+   */
+
+  var match1 = pickAcceptLanguage(['fr-CA', 'fr-FR', 'fr'], languages);
+  print(match1);
+  // fr-FR
+
+  // Pick a language in loose mode.
+  var match2 = pickAcceptLanguage(['en'], languages, loose: true);
+  print(match2);
+  // en
 }
 ```
