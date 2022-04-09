@@ -52,3 +52,47 @@ List<Language> parseAcceptLanguage(String? al) {
   langs.sort((a, b) => b.quality.compareTo(a.quality));
   return langs;
 }
+
+class PickOptions {
+  final bool? loose;
+  PickOptions({this.loose});
+}
+
+String? pickAcceptLanguage(List<String> supportedLanguages,
+    List<Language> acceptLanguage, PickOptions? options) {
+  if (supportedLanguages.isEmpty || acceptLanguage.isEmpty) {
+    return null;
+  }
+  var supported = supportedLanguages.map((support) {
+    var bits = support.split('-');
+    var hasScript = bits.length == 3;
+
+    return Language(
+        code: bits[0],
+        script: hasScript ? bits.tryGet(1) : null,
+        region: hasScript ? bits.tryGet(2) : bits.tryGet(1));
+  }).toList();
+
+  for (var i = 0; i < acceptLanguage.length; i++) {
+    var lang = acceptLanguage[i];
+    var langCode = lang.code.toLowerCase();
+    var langRegion = lang.region?.toLowerCase();
+    var langScript = lang.script?.toLowerCase();
+    for (var j = 0; j < supported.length; j++) {
+      var supportedCode = supported[j].code.toLowerCase();
+      var supportedScript = supported[j].script?.toLowerCase();
+      var supportedRegion = supported[j].region?.toLowerCase();
+      if (langCode == supportedCode &&
+          (options?.loose == true ||
+              (langScript?.isEmpty ?? true) ||
+              langScript == supportedScript) &&
+          (options?.loose == true ||
+              (langRegion?.isEmpty ?? true) ||
+              langRegion == supportedRegion)) {
+        return supportedLanguages[j];
+      }
+    }
+  }
+
+  return null;
+}
