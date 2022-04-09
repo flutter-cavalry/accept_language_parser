@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:accept_language_parser/accept_language_parser.dart';
 
 void main() async {
