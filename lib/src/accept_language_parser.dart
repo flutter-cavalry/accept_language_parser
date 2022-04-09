@@ -53,13 +53,9 @@ List<Language> parseAcceptLanguage(String? al) {
   return langs;
 }
 
-class PickOptions {
-  final bool? loose;
-  PickOptions({this.loose});
-}
-
-String? pickAcceptLanguage(List<String> supportedLanguages,
-    List<Language> acceptLanguage, PickOptions? options) {
+String? pickAcceptLanguage(
+    List<String> supportedLanguages, List<Language> acceptLanguage,
+    {bool? loose = false}) {
   if (supportedLanguages.isEmpty || acceptLanguage.isEmpty) {
     return null;
   }
@@ -83,10 +79,10 @@ String? pickAcceptLanguage(List<String> supportedLanguages,
       var supportedScript = supported[j].script?.toLowerCase();
       var supportedRegion = supported[j].region?.toLowerCase();
       if (langCode == supportedCode &&
-          (options?.loose == true ||
+          (loose == true ||
               (langScript?.isEmpty ?? true) ||
               langScript == supportedScript) &&
-          (options?.loose == true ||
+          (loose == true ||
               (langRegion?.isEmpty ?? true) ||
               langRegion == supportedRegion)) {
         return supportedLanguages[j];

@@ -9,9 +9,7 @@ void t(String s, List<Language> langs) async {
 
 void p(List<String> supported, String al, String? result,
     {bool? loose = false}) async {
-  expect(
-      pickAcceptLanguage(
-          supported, parseAcceptLanguage(al), PickOptions(loose: loose)),
+  expect(pickAcceptLanguage(supported, parseAcceptLanguage(al), loose: loose),
       result);
 }
 
