@@ -22,6 +22,7 @@ class Language {
   }
 }
 
+/// Parses the given "Accept-Language" header into an array of [Language].
 List<Language> parseAcceptLanguage(String? al) {
   var strings = regex.allMatches(al ?? '');
   var langs = strings
@@ -53,6 +54,7 @@ List<Language> parseAcceptLanguage(String? al) {
   return langs;
 }
 
+/// Finds the best match from a list of supported languages and preferred languages.
 String? pickAcceptLanguage(
     List<String> supportedLanguages, List<Language> acceptLanguage,
     {bool? loose = false}) {
