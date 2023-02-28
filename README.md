@@ -1,5 +1,5 @@
 [![pub package](https://img.shields.io/pub/v/accept_language_parser.svg)](https://pub.dev/packages/accept_language_parser)
-[![Build Status](https://github.com/mgenware/accept_language_parser/workflows/Build/badge.svg)](https://github.com/mgenware/accept_language_parser/actions)
+[![Build Status](https://github.com/flutter-cavalry/accept_language_parser/workflows/Build/badge.svg)](https://github.com/flutter-cavalry/accept_language_parser/actions)
 
 Dart port of [accept-language-parser](https://github.com/opentable/accept-language-parser).
 
