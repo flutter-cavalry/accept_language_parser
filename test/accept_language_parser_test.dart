@@ -1,13 +1,13 @@
 import 'package:accept_language_parser/src/accept_language_parser.dart';
 import 'package:test/test.dart';
 
-void t(String s, List<Language> langs) async {
+Future<void> t(String s, List<Language> langs) async {
   // `equals` doesn't support deep object comparison. Convert params to string arrays instead.
   expect(parseAcceptLanguage(s).map((e) => e.toString()),
       equals(langs.map((e) => e.toString())));
 }
 
-void p(List<String> supported, String al, String? result,
+Future<void> p(List<String> supported, String al, String? result,
     {bool? loose = false}) async {
   expect(pickAcceptLanguage(supported, parseAcceptLanguage(al), loose: loose),
       result);

@@ -3,7 +3,7 @@
 import 'package:accept_language_parser/accept_language_parser.dart';
 
 void main() async {
-  var languages = parseAcceptLanguage('en-GB,en;q=0.8,fr-FR');
+  final languages = parseAcceptLanguage('en-GB,en;q=0.8,fr-FR');
   print(languages);
   /**
     [
@@ -28,12 +28,12 @@ void main() async {
     ]
    */
 
-  var match1 = pickAcceptLanguage(['fr-CA', 'fr-FR', 'fr'], languages);
+  final match1 = pickAcceptLanguage(['fr-CA', 'fr-FR', 'fr'], languages);
   print(match1);
   // fr-FR
 
   // Pick a language in loose mode.
-  var match2 = pickAcceptLanguage(['en'], languages, loose: true);
+  final match2 = pickAcceptLanguage(['en'], languages, loose: true);
   print(match2);
   // en
 }

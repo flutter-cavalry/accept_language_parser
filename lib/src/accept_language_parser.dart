@@ -17,26 +17,26 @@ class Language {
 
   @override
   String toString() {
-    var encoder = JsonEncoder();
+    final encoder = JsonEncoder();
     return encoder.convert({'c': code, 's': script, 'r': region, 'q': quality});
   }
 }
 
 /// Parses the given "Accept-Language" header into an array of [Language].
 List<Language> parseAcceptLanguage(String? al) {
-  var strings = regex.allMatches(al ?? '');
-  var langs = strings
+  final strings = regex.allMatches(al ?? '');
+  final langs = strings
       .map((m) {
-        var str = m.group(0);
+        final str = m.group(0);
         if (str == null || str.isEmpty) {
           return null;
         }
-        var bits = str.split(';');
+        final bits = str.split(';');
         if (bits.isEmpty) {
           return null;
         }
-        var ietf = bits[0].split('-');
-        var hasScript = ietf.length == 3;
+        final ietf = bits[0].split('-');
+        final hasScript = ietf.length == 3;
 
         return Language(
             code: ietf[0],
@@ -61,9 +61,9 @@ String? pickAcceptLanguage(
   if (supportedLanguages.isEmpty || acceptLanguage.isEmpty) {
     return null;
   }
-  var supported = supportedLanguages.map((support) {
-    var bits = support.split('-');
-    var hasScript = bits.length == 3;
+  final supported = supportedLanguages.map((support) {
+    final bits = support.split('-');
+    final hasScript = bits.length == 3;
 
     return Language(
         code: bits[0],
@@ -72,14 +72,14 @@ String? pickAcceptLanguage(
   }).toList();
 
   for (var i = 0; i < acceptLanguage.length; i++) {
-    var lang = acceptLanguage[i];
-    var langCode = lang.code.toLowerCase();
-    var langRegion = lang.region?.toLowerCase();
-    var langScript = lang.script?.toLowerCase();
+    final lang = acceptLanguage[i];
+    final langCode = lang.code.toLowerCase();
+    final langRegion = lang.region?.toLowerCase();
+    final langScript = lang.script?.toLowerCase();
     for (var j = 0; j < supported.length; j++) {
-      var supportedCode = supported[j].code.toLowerCase();
-      var supportedScript = supported[j].script?.toLowerCase();
-      var supportedRegion = supported[j].region?.toLowerCase();
+      final supportedCode = supported[j].code.toLowerCase();
+      final supportedScript = supported[j].script?.toLowerCase();
+      final supportedRegion = supported[j].region?.toLowerCase();
       if (langCode == supportedCode &&
           (loose == true ||
               (langScript?.isEmpty ?? true) ||
